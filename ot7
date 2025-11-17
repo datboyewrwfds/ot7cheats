@@ -1,12 +1,16 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+Rayfield:LoadConfiguration()
+
 local Window = Rayfield:CreateWindow({
-   Name = "NFL UNIVERSE FOOTBALL AND OT7 SCRIPTS",
+   Name = "OT7 GUI",
    Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
-   LoadingTitle = "NFL UNIVERSE FOOTBALL AND OT7 SCRIPTS",
-   LoadingSubtitle = "by unknown",
+   LoadingTitle = "OT7 GUI",
+   LoadingSubtitle = "by Unknown",
    ShowText = "Rayfield", -- for mobile users to unhide rayfield, change if you'd like
    Theme = "Ocean", -- Check https://docs.sirius.menu/rayfield/configuration/themes
 
-   ToggleUIKeybind = "K", -- The keybind to toggle the UI visibility (string like "K" or Enum.KeyCode)
+   ToggleUIKeybind = "M", -- The keybind to toggle the UI visibility (string like "K" or Enum.KeyCode)
 
    DisableRayfieldPrompts = false,
    DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
@@ -36,16 +40,23 @@ local Window = Rayfield:CreateWindow({
 })
 
 
+
 local MainTab = Window:CreateTab("Main", 4483362458) -- Title, Image
 
-local Slider = MainTab:CreateSlider({
-   Name = "Walkspeed",
-   Range = {21, 100},
-   Increment = 1,
-   Suffix = "Speed",
-   CurrentValue = 21,
-   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+
+local Toggle = MainTab:CreateToggle({
+   Name = "Auto Tuck",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(v)
-      game.Players.LocalPlayers.Character.Humanoid.WalkSpeed = v
+      local Player = game.Workspace.DatBoy0401
+      local catch = Player.Jersey.PlayerEngine.Catch
+      local tuck = Player.Values.Tuck
+      
+      when catch = true
+      wait(0.5)
+      tuck.Value = true
+      v()
    end,
 })
+Toggle:Set(false)
